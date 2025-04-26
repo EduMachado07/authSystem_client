@@ -31,7 +31,6 @@ const FormsLogin = () => {
         email: data.email,
         password: data.password,
       });
-      console.log(res);
 
       navigate("/profile");
     } catch (error) {
@@ -122,7 +121,7 @@ const FormsLogin = () => {
       <p className="text-sm font-semibold text-center">OU CONTINUE COM</p>
 
       {/* -- third party -- */}
-      <section className="flex items-center px-2 gap-7">
+      {/* <section className="flex items-center px-2 gap-7">
         <div className="w-2/4">
           <Button variant={"outline"} className="w-full">
             <Google />
@@ -135,7 +134,7 @@ const FormsLogin = () => {
             GitHub
           </Button>
         </div>
-      </section>
+      </section> */}
 
       {/* LINKS */}
       <>

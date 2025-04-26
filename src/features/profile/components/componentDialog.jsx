@@ -9,6 +9,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 
 const ComponentDialog = ({
   trigger,
@@ -17,6 +18,7 @@ const ComponentDialog = ({
   content,
   btnClick,
   btnVariant,
+  isLoading,
   btnLabel,
 }) => {
   return (
@@ -41,7 +43,11 @@ const ComponentDialog = ({
         {/* FOOTER */}
         <section className="flex flex-col justify-end gap-2">
           <Button onClick={btnClick} size={"sm"} variant={btnVariant}>
-            {btnLabel}
+            {isLoading ? (
+              <Loader2 className="animate-spin w-4 h-4" />
+            ) : (
+              `${btnLabel}`
+            )}
           </Button>
 
           <DialogClose asChild>

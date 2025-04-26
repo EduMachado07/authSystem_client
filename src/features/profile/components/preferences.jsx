@@ -1,13 +1,6 @@
 import SectionProfile from "./sectionProfile";
-import ComponentDialog from "./componentDialog";
-
-import Account from "./account";
-import Security from "./security";
-import Historic from "./historic";
 
 import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -17,9 +10,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { DialogClose } from "@/components/ui/dialog";
+
+import usePreferencesStore from "@/contexts/preferences.context";
 
 const Preferences = () => {
+  const { setTheme, theme } = usePreferencesStore();
+
   return (
     <main className="flex flex-col gap-7">
       <SectionProfile props={"Preferências"} />
@@ -34,30 +30,33 @@ const Preferences = () => {
           </p>
         </div>
         {/* select idioma */}
-        <Select>
+        <Select
+          value={theme}
+          onValueChange={(value) => {
+            setTheme(value);
+          }}
+        >
           <SelectTrigger className="w-[100px] border-0 shadow-none md:hover:bg-gray-200">
-            <SelectValue placeholder="claro" />
+            <SelectValue />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectItem value="claro">Claro</SelectItem>
-              <SelectItem value="escuro">Escuro</SelectItem>
-              <SelectItem value="sistema">Sistema</SelectItem>
+              <SelectItem value="light">Claro</SelectItem>
+              <SelectItem value="dark">Escuro</SelectItem>
+              <SelectItem value="system">Sistema</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
       </section>
 
       {/* IDIOMA DO SITE */}
-      <section className="flex justify-between items-end">
-        {/* aparência */}
+      {/* <section className="flex justify-between items-end">
         <div className="flex flex-col gap-3 w-3/5">
           <Label>Idioma</Label>
           <p className="text-colorText text-sm text-pretty">
             Escolha o idioma usado no sistema
           </p>
         </div>
-        {/* select idioma */}
         <Select>
           <SelectTrigger className="border-0 shadow-none md:hover:bg-gray-200">
             <SelectValue placeholder="Portguês-BR" />
@@ -69,7 +68,7 @@ const Preferences = () => {
             </SelectGroup>
           </SelectContent>
         </Select>
-      </section>
+      </section> */}
     </main>
   );
 };
