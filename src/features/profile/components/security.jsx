@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { useState, useEffect } from "react";
 
-import { apiUser } from "@/store/axios.config";
+import { apiUser } from "@/store/axios.store";
 
 const Security = () => {
   const { user, clearUser } = useUserStore();

@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import usePreferencesStore from "@/contexts/preferences.context";
 
@@ -7,34 +7,36 @@ import background from "../../assets/login.assets.jpg";
 
 function Auth() {
   const { theme } = usePreferencesStore();
+  const [effectiveTheme, setEffectiveTheme] = useState("light");
 
   useEffect(() => {
     const root = window.document.documentElement;
 
     const applyTheme = () => {
-      if (theme === "light") {
-        root.classList.remove("dark");
-      } else if (theme === "dark") {
+      let currentTheme = theme;
+
+      if (theme === "system") {
+        const isSystemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        currentTheme = isSystemDark ? "dark" : "light";
+      }
+
+      setEffectiveTheme(currentTheme);
+
+      if (currentTheme === "dark") {
         root.classList.add("dark");
       } else {
-        // Tema do sistema
-        const isSystemDark = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches;
-        if (isSystemDark) {
-          root.classList.add("dark");
-        } else {
-          root.classList.remove("dark");
-        }
+        root.classList.remove("dark");
       }
     };
 
     applyTheme();
 
-    // Escutar mudanças no sistema (opcional)
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const systemThemeChange = (e) => {
       if (theme === "system") {
+        const newTheme = e.matches ? "dark" : "light";
+        setEffectiveTheme(newTheme);
+
         if (e.matches) {
           root.classList.add("dark");
         } else {
@@ -58,8 +60,8 @@ function Auth() {
       {/* FORMULARIO */}
       <section
         className={`${
-          theme === "light" ? "bg-[#F5F7FA]" : "bg-[#1a1a1a]"
-        }h-full xl:w-3/5 w-full flex flex-col gap-7 justify-center items-center px-8 md:px-28 xl:px-52`}
+          effectiveTheme === "light" ? "bg-[#F5F7FA]" : "bg-[#1a1a1a]"
+        } h-full xl:w-3/5 w-full flex flex-col gap-7 justify-center items-center px-8 md:px-28 xl:px-52`}
       >
         {/* -- component forms -- */}
         <Outlet />

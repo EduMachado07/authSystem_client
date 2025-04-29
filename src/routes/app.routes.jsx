@@ -9,6 +9,8 @@ import AuthCode from "@/features/auth/components/authCode";
 
 import Profile from "@/features/profile/profile";
 
+import PrivateRoute from "@/store/privateRoute.store";
+
 export const Routes = createBrowserRouter([
   {
     path: "/",
@@ -21,12 +23,31 @@ export const Routes = createBrowserRouter([
       { path: "login", element: <FormsLogin /> },
       { path: "register", element: <FormsRegister /> },
       { path: "user-email", element: <FormsEmail /> },
-      { path: "reset-password", element: <FormsResetPassword /> },
-      { path: "auth-code", element: <AuthCode /> },
+
+      {
+        path: "reset-password",
+        element: (
+          <PrivateRoute>
+            <FormsResetPassword />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "auth-code",
+        element: (
+          <PrivateRoute>
+            <AuthCode />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
   {
     path: "/profile",
-    element: <Profile />,
+    element: (
+      <PrivateRoute>
+        <Profile />
+      </PrivateRoute>
+    ),
   },
 ]);

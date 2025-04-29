@@ -4,13 +4,13 @@ import { Label } from "@/components/ui/label";
 
 import { Loader2 } from "lucide-react";
 
-import Google from "./svgGoogle";
-import Github from "./svgGithub";
+// import Google from "./svgGoogle";
+// import Github from "./svgGithub";
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
-import { apiAuth } from "@/store/axios.config";
+import { apiAuth } from "@/store/axios.store";
 
 const FormsLogin = () => {
   const navigate = useNavigate();

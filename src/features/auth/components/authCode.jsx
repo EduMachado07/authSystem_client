@@ -10,7 +10,7 @@ import { Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
-import { apiAuth } from "@/store/axios.config";
+import { apiAuth } from "@/store/axios.store";
 
 const AuthCode = () => {
   const {
